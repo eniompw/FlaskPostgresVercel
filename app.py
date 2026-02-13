@@ -6,10 +6,6 @@ app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-secret-key-change-in-production')
 POSTGRES_URL = os.environ['POSTGRES_URL']
 
-@app.route('/')
-def home():
-	return render_template('login.html')
-
 @app.route('/create')
 def create():
 	try:
@@ -48,6 +44,10 @@ def select():
 	except Exception as e:
 		return str(e)
 
+@app.route('/')
+def home():
+	return render_template('login.html')
+
 @app.route('/login', methods=['POST'])
 def login():
 	try:
@@ -80,4 +80,3 @@ def success():
 def logout():
 	session.pop('username', None)
 	return redirect(url_for('home'))
-

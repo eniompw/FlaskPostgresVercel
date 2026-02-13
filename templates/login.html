@@ -70,7 +70,17 @@ span.psw {
 
 <h2>Login Form</h2>
 
-<form action="/action_page.php" method="post">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <div style="background-color: #f44336; color: white; padding: 15px; margin: 10px; border-radius: 5px;">
+      {% for message in messages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  {% endif %}
+{% endwith %}
+
+<form action="/login" method="post">
   <div class="imgcontainer">
     <img src="/static/img_avatar2.png" alt="Avatar" class="avatar">
   </div>
